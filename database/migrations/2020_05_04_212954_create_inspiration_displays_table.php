@@ -15,7 +15,8 @@ class CreateInspirationDisplaysTable extends Migration
     {
         Schema::create('inspiration_displays', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->unsignedBigInteger('inspiration_id');
+            $table->date('date_added');
         });
     }
 

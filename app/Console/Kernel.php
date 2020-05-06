@@ -2,8 +2,10 @@
 
 namespace App\Console;
 
+use App\Console\Commands\CreateDailyInspiration;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use Illuminate\Support\Facades\Log;
 
 class Kernel extends ConsoleKernel
 {
@@ -14,6 +16,7 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         //
+        CreateDailyInspiration::class,
     ];
 
     /**
@@ -25,6 +28,15 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // $schedule->command('inspire')->hourly();
+        $schedule->command('create:inspiration')
+            ->dailyAt('5:00')
+            ->onSuccess(function() {
+                Log::info('Successfully inserted');
+            })
+            ->onFailure(function() {
+                Log::error('Error saving inspiration display');
+            });
+
     }
 
     /**

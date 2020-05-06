@@ -5,12 +5,12 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
-class InspirationDisplay extends Controller
+class InspirationDisplayController extends Controller
 {
     //
     public function getTodaysInspiration() {
         // get inspiration
-        $inspiration = InspirationDisplay::with('inspiration')
+        $inspiration = InspirationDisplayController::with('inspiration')
             ->where('date_added', Carbon::today()->toDateString())
             ->first();
 

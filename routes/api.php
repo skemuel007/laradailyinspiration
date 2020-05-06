@@ -14,6 +14,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
+/*Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
+});*/
+
+Route::group([
+    'prefix' => 'v1'
+], function() {
+    Route::apiResource('inspiration', 'InspirationController');
+    Route::get('daily/quotes', 'InspirationDisplayController@getTodaysInspiration');
+    Route::post('file', 'FileController@store');
+    Route::get('file/{id}', 'FileController@downloadFile');
 });

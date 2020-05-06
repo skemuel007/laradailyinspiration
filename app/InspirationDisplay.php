@@ -11,4 +11,8 @@ class InspirationDisplay extends Model
         'inspiration_id',
         'date_added'
     ];
+
+    public function inspiration() {
+        return $this->belongsTo(Inspiration::class );
+    }
 }
